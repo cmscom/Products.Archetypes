@@ -70,7 +70,7 @@
 	function renderOption(option, i, selectName, $container) {
 		// dl, dt, & dd semantically associates selector name with values
 		// label makes the text clickable, like a multiple-select
-		var html = '<dd><label for="' + $container.attr('id') + '-' + i + '"><input type="checkbox" name="' + selectName + '" value="' + option.value + '" id="' + $container.attr('id') + '-' + i + '"';
+		var html = '<dd><label for="' + $container.prop('id') + '-' + i + '"><input type="checkbox" name="' + selectName + '" value="' + option.value + '" id="' + $container.prop('id') + '-' + i + '"';
 		if( option.selected ) {
 			html += ' checked="checked"';
 		}
@@ -112,7 +112,7 @@
 		$(".existingTagsHelp", $container).text('');
 
 		// generate the html for the new options
-		var html = renderOptions(options, optionsBox.attr('name'), $container);
+		var html = renderOptions(options, optionsBox.prop('name'), $container);
 		optionsBox.html(html);
 
 		// Format selected options
@@ -154,7 +154,7 @@
 		// Handle mouse click of checkbox
 		optionsBox.find('INPUT:checkbox').click( function() {
 			// set the label checked class
-			$(this).parent('LABEL').toggleClass('checked', $(this).attr('checked'));
+			$(this).parent('LABEL').toggleClass('checked', $(this).prop('checked'));
 
 			updateSelected.call(optionsBox);
 			// Highlight selected option
@@ -265,7 +265,7 @@
 			if( e.keyCode == 13 || e.keyCode == 32 ) {
 				var selectedCheckbox = optionsBox.find('LABEL.hover INPUT:checkbox');
 				// Set the checkbox (and label class)
-				selectedCheckbox.attr('checked', !selectedCheckbox.attr('checked')).parent('LABEL').toggleClass('checked', selectedCheckbox.attr('checked'));
+				selectedCheckbox.prop('checked', !selectedCheckbox.prop('checked')).parent('LABEL').toggleClass('checked', selectedCheckbox.prop('checked'));
 				// Highlight selected option
 				// placeholder
 				// Refocus
@@ -338,7 +338,7 @@
 		var i = 0;
 		var display = '';
 		optionsBox.find('INPUT:checkbox').not('.selectAll, .optGroup').each( function() {
-			if ($(this).attr('checked')) {
+			if ($(this).prop('checked')) {
 				i++;
 				display = display +
 				'<p class="selectedTag"><span class="selectedTag">' +
@@ -384,7 +384,7 @@
 				var options = [];
 				select.children().each( function() {
 					if( select.val() !== '' ) {
-						options.push({ text: $(this).html(), value: $(this).val(), selected: $(this).attr('selected') });
+						options.push({ text: $(this).html(), value: $(this).val(), selected: $(this).prop('selected') });
 					}
 				});
 
@@ -392,8 +392,8 @@
 				select.remove();
 
 				// Add the id & name that was on the original select element to the new div
-				optionsBox.attr("id", select.attr("id"));
-				optionsBox.attr("name", select.attr("name"));
+				optionsBox.prop("id", select.prop("id"));
+				optionsBox.prop("name", select.prop("name"));
 
 				// Build the dropdown options
 				buildOptions.call(optionsBox, options, $container);
