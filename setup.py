@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '1.9.22.dev0'
+version = '1.9.22.cmscom'
 
 setup(name='Products.Archetypes',
       version=version,
